@@ -1,0 +1,62 @@
+Bash
+1. Create a new directory named as d and copy all text files from abc directory into d
+mkdir p
+cp abc/*.txt d/
+
+2. Create a new directory named as p and create empty py files in it with exactly same names as py files in abc
+cp abc/*.py p/
+
+3. Count all jpeg files in directory abc
+cd ~/abc
+ls *.jpeg | wc -l
+
+
+4. Create a directory labels and create the txt files with exactly the same names as jepg in abc directory.
+ mkdir labels   # create directory called "labels"
+ cd abc          # go to directory "abc"
+ for file in *.jpeg; do touch "../labels/${file%.*}.txt"; done
+
+
+Question no 3
+(base) hafsah@Hafsa-Laptop:/home$ cd hafsah
+(base) hafsah@Hafsa-Laptop:~$ cd t
+(base) hafsah@Hafsa-Laptop:~/t$ mkdir final
+(base) hafsah@Hafsa-Laptop:~/t$ for i in images/*.jpeg; do if [ -e "labels/$(basename $i .jpeg).txt" ]; then cp $i final/; fi; done
+
+// mkdir t/final: Creates a new directory called "final" inside the "t" directory.
+
+for filename in t/images/*.jpeg; do: Loops through each JPEG file in the "t/images" directory.
+
+basename=$(basename "$filename" .jpeg): Extracts the file name without the ".jpeg" extension.
+
+if [ -e "t/labels/$basename.txt" ]; then: Checks if a corresponding ".txt" file exists in the "t/labels" directory for the current JPEG file.
+
+cp "$filename" "t/final/$basename.jpeg": Copies the current JPEG file to the "t/final" directory with the same file name as the original, if there is a matching ".txt" file.
+
+Question 4
+GREP
+1.List all "hello words" as a text, present in py files of directory abc
+grep -r "hello world" abc/*.py
+
+2.List all pip packages which are installed and have tens in it
+pip list | grep tens
+
+
+3.List all running process, which name is notebook and kill those processes
+sudo killall notebook
+
+Question no 5
+script:
+ nano hello-world.sh
+chmod +x hello-world.sh
+./hello-world.sh abc/9.py
+
+
+Question no 6:
+(base) hafsah@Hafsa-Laptop:~$ cd /home
+(base) hafsah@Hafsa-Laptop:/home$ cd /hafsah
+-bash: cd: /hafsah: No such file or directory
+(base) hafsah@Hafsa-Laptop:/home$ cd hafsah
+(base) hafsah@Hafsa-Laptop:~$ sed -i 's/Software/IT/g' employees.txt
+(base) hafsah@Hafsa-Laptop:~$ awk -F "," '$3>=30 {print $0}' employees.txt > temp.txt
+(base) hafsah@Hafsa-Laptop:~$ mv temp.txt employees.txt
